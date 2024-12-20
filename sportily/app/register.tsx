@@ -7,36 +7,34 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
-  ImageBackground,
 } from "react-native";
 import { ClickCountContext } from "./ClickCountContext";
-// import { ClickCountContext } from "./context"; // Import the context
 
 export default function Register() {
-  const [name, setName] = useState(""); // State for name
-  const [email, setEmail] = useState(""); // State for email
-  const [password, setPassword] = useState(""); // State for password
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<{
     name?: string;
     email?: string;
     password?: string;
   }>({});
   const { setUserEmail, setUserPassword, setYourName } =
-    useContext(ClickCountContext); // Access context functions
-  const router = useRouter(); // Hook for navigation
+    useContext(ClickCountContext);
+  const router = useRouter();
 
   const handleSignUp = () => {
     setYourName(name);
     let formValid = true;
-    const newErrors: any = {}; // Store errors to display
+    const newErrors: any = {};
 
-    // Basic name validation
+    // name validation
     if (!name) {
       newErrors.name = "Name is required";
       formValid = false;
     }
 
-    // Basic email validation
+    // email validation
     if (!email) {
       newErrors.email = "Email is required";
       formValid = false;
@@ -45,7 +43,7 @@ export default function Register() {
       formValid = false;
     }
 
-    // Basic password validation
+    //password validation
     if (!password) {
       newErrors.password = "Password is required";
       formValid = false;
@@ -54,23 +52,17 @@ export default function Register() {
       formValid = false;
     }
 
-    setErrors(newErrors); // Update error state
+    setErrors(newErrors);
 
     if (formValid) {
       // Save email and password in context
       setUserEmail(email);
       setUserPassword(password);
-      router.push("/"); // Navigate to login page
+      router.push("/");
     }
   };
 
   return (
-    // <ImageBackground
-    //   source={{
-    //     uri: "https://preview.redd.it/i-made-cristiano-ronaldo-wallpaper-1284-x-2778-full-hd-v0-0ycaahii6a0e1.png?width=1080&crop=smart&auto=webp&s=6d3a5400241b7b73e2b960b7987ad6a246928918",
-    //   }}
-    //   style={styles.backgroundImage}
-    // >
     <View style={styles.container}>
       {/* Logo */}
       <View style={styles.logoContainer}>
@@ -78,16 +70,14 @@ export default function Register() {
           source={{
             uri: "https://res.cloudinary.com/dfssgotc9/image/upload/v1734626153/sportapp_kvinjm.png",
           }}
-          style={styles.cardImage}
+          style={styles.logoImage}
         />
       </View>
-      {/* Sign Up Header */}
-      {/* <Text style={styles.title}>Sign Up</Text> */}
-      {/* Input Fields */}
+
       <TextInput
         placeholderTextColor="#000"
         placeholder="Name"
-        style={styles.input}
+        style={styles.inputField}
         value={name}
         onChangeText={setName}
       />
@@ -95,7 +85,7 @@ export default function Register() {
       <TextInput
         placeholderTextColor="#000"
         placeholder="Email"
-        style={styles.input}
+        style={styles.inputField}
         keyboardType="email-address"
         value={email}
         onChangeText={setEmail}
@@ -104,7 +94,7 @@ export default function Register() {
       <TextInput
         placeholderTextColor="#000"
         placeholder="Password"
-        style={styles.input}
+        style={styles.inputField}
         secureTextEntry
         value={password}
         onChangeText={setPassword}
@@ -117,47 +107,36 @@ export default function Register() {
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
       {/* Footer Text */}
-      <Text style={styles.footerText}>
+      <Text style={styles.signInText}>
         Already have an account?{" "}
-        <Text style={styles.link}>
+        <Text style={styles.linkText}>
           <Link href="/">Login</Link>
         </Text>
       </Text>
     </View>
-    // </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  // backgroundImage: {
-  //   flex: 1,
-  //   resizeMode: "cover",
-  // },
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.514)", // Optional overlay for readability
+    backgroundColor: "rgba(255, 255, 255, 0.514)",
     padding: 20,
   },
   logoContainer: {
     flexDirection: "row",
     marginBottom: 50,
   },
-  logoBox: {
-    width: 40,
-    height: 40,
-    backgroundColor: "#FFD700", // Example color for the logo
-    margin: 5,
-    borderRadius: 5,
-  },
+
   title: {
     fontSize: 32,
     fontWeight: "bold",
     color: "#000",
     marginBottom: 20,
   },
-  input: {
+  inputField: {
     width: "100%",
     height: 50,
     color: "#000",
@@ -177,7 +156,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginTop: 10,
   },
-  cardImage: {
+  logoImage: {
     height: 80,
     width: "120%",
   },
@@ -186,12 +165,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
-  footerText: {
+  signInText: {
     marginTop: 20,
     fontSize: 14,
     color: "#555",
   },
-  link: {
+  linkText: {
     color: "#c93673",
     fontWeight: "bold",
     fontSize: 16,

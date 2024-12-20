@@ -7,25 +7,24 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
-  ImageBackground,
 } from "react-native";
 import { ClickCountContext } from "./ClickCountContext";
 
 export default function Index() {
-  const [email, setEmail] = useState(""); // State for email input
-  const [password, setPassword] = useState(""); // State for password input
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<{ email?: string; password?: string }>(
     {}
   );
   const { userEmail, userPassword, setIsAuthenticated } =
-    useContext(ClickCountContext); // Access context values
-  const router = useRouter(); // Hook for navigation
+    useContext(ClickCountContext);
+  const router = useRouter();
 
   const handleLogin = () => {
     let formValid = true;
-    const newErrors: any = {}; // Store errors to display
+    const newErrors: any = {};
 
-    // Basic email validation
+    // email validation
     if (!email) {
       newErrors.email = "Email is required";
       formValid = false;
@@ -34,7 +33,7 @@ export default function Index() {
       formValid = false;
     }
 
-    // Basic password validation
+    // password validation
     if (!password) {
       newErrors.password = "Password is required";
       formValid = false;
@@ -43,26 +42,20 @@ export default function Index() {
       formValid = false;
     }
 
-    setErrors(newErrors); // Update error state
+    setErrors(newErrors);
 
     if (formValid) {
       // Check if credentials match with context values
       if (email === userEmail && password === userPassword) {
-        setIsAuthenticated(true); // Update authentication status
-        router.push("/home"); // Redirect to home page
+        setIsAuthenticated(true);
+        router.push("/home");
       } else {
-        setErrors({ ...newErrors, password: "Invalid credentials" }); // Show error if credentials don't match
+        setErrors({ ...newErrors, password: "Invalid credentials" });
       }
     }
   };
 
   return (
-    // <ImageBackground
-    //   source={{
-    //     uri: "https://preview.redd.it/i-made-cristiano-ronaldo-wallpaper-1284-x-2778-full-hd-v0-0ycaahii6a0e1.png?width=1080&crop=smart&auto=webp&s=6d3a5400241b7b73e2b960b7987ad6a246928918",
-    //   }}
-    //   style={styles.backgroundImage}
-    // >
     <View style={styles.container}>
       {/* Logo */}
       <View style={styles.logoContainer}>
@@ -70,7 +63,7 @@ export default function Index() {
           source={{
             uri: "https://res.cloudinary.com/dfssgotc9/image/upload/v1734626153/sportapp_kvinjm.png",
           }}
-          style={styles.cardImage}
+          style={styles.logoImage}
         />
       </View>
       {/* Input Fields */}
@@ -97,14 +90,13 @@ export default function Index() {
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
-      <Text style={styles.footerText}>
+      <Text style={styles.signupText}>
         Don’t have an account yet?{" "}
-        <Text style={styles.link}>
+        <Text style={styles.linktext}>
           <Link href="/register">Sign Up</Link>
         </Text>
       </Text>
     </View>
-    // </ImageBackground>
   );
 }
 
@@ -137,7 +129,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     paddingLeft: 15,
     fontSize: 16,
-    // backgroundColor: "#fff",
   },
   button: {
     width: "100%",
@@ -153,12 +144,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
-  footerText: {
+  signupText: {
     marginTop: 20,
     fontSize: 14,
     color: "#555",
   },
-  link: {
+  linktext: {
     color: "#c93673",
     fontWeight: "bold",
   },
@@ -167,7 +158,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginBottom: 10,
   },
-  cardImage: {
+  logoImage: {
     height: 80,
     width: "120%",
   },
