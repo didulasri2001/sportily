@@ -2,21 +2,21 @@ import { createContext, useState } from "react";
 
 // Extending the context to include authentication states
 export const ClickCountContext = createContext({
-  clickCount: 0, // Default value for clickCount
-  setClickCount: (value: number) => {}, // Placeholder for the setter function
-  yourName: "", // Default value for yourName
-  setYourName: (value: string) => {}, // Placeholder for the setter function
-  isAuthenticated: false, // Default value for authentication status
-  setIsAuthenticated: (value: boolean) => {}, // Placeholder for setter function
-  userEmail: "", // Default value for the user's email
-  setUserEmail: (value: string) => {}, // Placeholder for setter function
-  userPassword: "", // Default value for the user's password
-  setUserPassword: (value: string) => {}, // Placeholder for setter function
+  clickCount: 0,
+  setClickCount: (value: number) => {},
+  yourName: "",
+  setYourName: (value: string) => {},
+  isAuthenticated: false,
+  setIsAuthenticated: (value: boolean) => {},
+  userEmail: "",
+  setUserEmail: (value: string) => {},
+  userPassword: "",
+  setUserPassword: (value: string) => {},
 });
 
 const ClickCountProvider = ({ children }: { children: any }) => {
-  const [clickCount, setClickCount] = useState(0); // Global state for click count
-  const [yourName, setYourName] = useState(""); // Global state for your name
+  const [clickCount, setClickCount] = useState(0);
+  const [yourName, setYourName] = useState("");
 
   // Authentication state management
   const [isAuthenticated, setIsAuthenticated] = useState(false);
